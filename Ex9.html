@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function getStudentSummary(student) {
+        let scores = student.listMonhoc.map(m => m.score);
+        let avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2);
+        let rank = "";
+        if (avg >= 8.5)  {
+            rank = "Học sinh giỏi";
+        } else if (avg >= 7) {
+            rank = "Học sinh khá";
+        } else if (avg >= 5)
+            rank = "Học sinh trung bình";
+        else {
+            rank = "Học sinh yếu";
+        }
+        let best = student.listMonhoc.reduce((a, b) => a.score >= b.score ? a : b);
+        let weakest = student.listMonhoc.reduce((a, b) => a.score <= b.score ? a : b);
+        console.log(`${student.name} is ${student.age} years old.`);
+        console.log(`Average score: ${avg} -> ${rank}`);
+        console.log(`Best subject: ${best.subject} (${best.score})`);
+        console.log(`Weakest subject: ${weakest.subject} (${weakest.score})`);
+    }
+    let student = {
+        name: "Dev",
+        age: 20,
+        listMonhoc: [
+            { subject: "Math", score: 9 },
+            { subject: "English", score: 7.5 },
+            { subject: "Physics", score: 6 },
+            { subject: "Literature", score: 8.5 }
+        ]
+    };
+    getStudentSummary(student);
+    </script>
+</body>
+</html>
